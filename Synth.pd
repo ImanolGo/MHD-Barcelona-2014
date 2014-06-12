@@ -1,17 +1,17 @@
 #N canvas 0 22 1062 668 10;
 #X obj 266 0 dsp;
-#X obj 259 -37 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 259 -37 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
 1;
 #N canvas 284 118 543 565 voice_detector 0;
 #X obj 181 48 dbtorms;
 #X obj 258 124 hsl 128 15 0 100 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 493 1;
+-1 -1 2801 1;
 #X obj 176 93 autoscale 0 1;
 #X msg 305 57 reset;
 #X obj 174 131 * 100;
 #X floatatom 183 156 5 0 0 0 - - -;
 #X obj 188 211 change;
-#X obj 191 240 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 191 240 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
 1;
 #X obj 178 16 env~ 10000;
 #X obj 189 187 > 5;
@@ -101,7 +101,7 @@
 -1 -1;
 #X obj 746 -49 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
-#N canvas 925 132 450 300 Onsets-Simulator 0;
+#N canvas 925 132 450 300 Onsets-Simulator 1;
 #X obj 141 7 metro 500;
 #X obj 93 29 t b b;
 #X obj 91 57 bng 15 50 50 0 empty empty empty 17 7 0 10 -262144 -1
@@ -147,6 +147,9 @@
 #X obj 880 186 vox 4;
 #X obj 921 186 vox 5;
 #X obj 755 110 poly 5 1;
+#X obj 622 1 essentiaAnalysis;
+#X obj 649 56 pack f f;
+#X obj 638 28 mtof;
 #X connect 1 0 0 0;
 #X connect 2 0 4 0;
 #X connect 2 0 5 0;
@@ -154,6 +157,7 @@
 #X connect 3 0 2 0;
 #X connect 3 0 8 0;
 #X connect 3 0 18 0;
+#X connect 3 0 44 0;
 #X connect 4 0 37 0;
 #X connect 5 0 38 0;
 #X connect 7 0 12 0;
@@ -175,7 +179,6 @@
 #X connect 26 0 27 0;
 #X connect 30 0 31 0;
 #X connect 31 0 24 0;
-#X connect 31 0 32 0;
 #X connect 32 0 25 0;
 #X connect 33 0 35 0;
 #X connect 35 0 16 0;
@@ -185,3 +188,7 @@
 #X connect 43 0 29 0;
 #X connect 43 1 26 1;
 #X connect 43 2 26 2;
+#X connect 44 0 46 0;
+#X connect 44 1 45 1;
+#X connect 45 0 32 0;
+#X connect 46 0 45 0;
