@@ -10,14 +10,13 @@
 #X obj 230 163 osc~ 82;
 #X obj 157 98 line~;
 #X obj 156 25 r g-vox;
-#X obj 137 287 pan~;
 #X obj 365 185 random 90;
 #X obj 362 207 - 45;
 #X obj 287 78 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
 #X obj 358 276 line 0 20;
 #X obj 366 339 hsl 128 15 -45 45 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 8749 1;
+-1 -1 10442 1;
 #X obj 157 123 *~ 1.05;
 #X msg 157 77 \$1 100;
 #X msg 363 247 \$1 2000;
@@ -25,22 +24,19 @@
 #X connect 1 0 4 0;
 #X connect 2 0 0 0;
 #X connect 2 0 1 1;
-#X connect 3 0 18 0;
-#X connect 3 0 14 0;
+#X connect 3 0 17 0;
+#X connect 3 0 13 0;
 #X connect 6 0 7 0;
 #X connect 7 0 5 0;
 #X connect 8 0 6 0;
 #X connect 8 0 7 1;
-#X connect 9 0 17 0;
+#X connect 9 0 16 0;
 #X connect 9 0 8 0;
 #X connect 10 0 3 0;
-#X connect 11 0 4 0;
-#X connect 11 1 5 0;
-#X connect 12 0 13 0;
-#X connect 13 0 19 0;
-#X connect 14 0 12 0;
-#X connect 15 0 16 0;
-#X connect 15 0 11 1;
-#X connect 17 0 2 0;
-#X connect 18 0 9 0;
-#X connect 19 0 15 0;
+#X connect 11 0 12 0;
+#X connect 12 0 18 0;
+#X connect 13 0 11 0;
+#X connect 14 0 15 0;
+#X connect 16 0 2 0;
+#X connect 17 0 9 0;
+#X connect 18 0 14 0;
