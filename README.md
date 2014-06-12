@@ -14,8 +14,8 @@ Ideas
 
 - Speach to text recognition: Panos
 - Freesound.org database search based on number of hits for key sounds: Álvaro
-- Essentia analysis: Jorge
-- Sound effects & background soundtrack: Jorge & Imanol
+- Essentia analysis / Pd integration: Jorge & Imanol
+- Sound effects & background soundtrack: Mathieu & Andres
 - Storytelling and design: Imanol
 - Presentation & Narration: Imanol
 
