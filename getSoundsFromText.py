@@ -2,19 +2,15 @@ import freesound
 c = freesound.FreesoundClient()
 c.set_token("36e286ba563287f86eed608c13cacd520ced010e","token")
 
-tag = "bird"
+text_file = open('3pigs.txt', 'r')
 
-print "Searching for " + tag + ":"
-print "----------------------------"
-results_pager = c.text_search(query=tag,sort="rating_desc")
-print "Num results: " + str(results_pager.count)
-print "\t ----- PAGE 1 -----"
-for i in range(0, len(results_pager.results)):
-    sound = results_pager[i]
-    print "\t- " + sound.name + " by " + sound.username
-print "\t ----- PAGE 2 -----"
-results_pager = results_pager.next_page()
-for i in range(0, len(results_pager.results)):
-    sound = results_pager[i]
-    print "\t- " + sound.name + " by " + sound.username
-print "\n"
+words = text_file.read().split()
+sounds = {}
+
+for word in words:
+	if word not in sounds.keys() and '.' in word:
+		word = word.replace('.', '')
+		print "Searching for " + word + ":"
+		print "----------------------------"
+		results_pager = c.text_search(query=word, filter="duration:[0 TO 1.5]" , sort="rating_desc", fields="id,name,previews")
+		sounds[word] = results_pager[0].retrieve_preview('.', word+'.mp3')

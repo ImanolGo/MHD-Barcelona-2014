@@ -1,0 +1,126 @@
+#N canvas 66 70 1080 715 10;
+#X obj -358 -225 adc~;
+#X msg -337 -178 delayMode 0;
+#X obj -277 -128 s avg;
+#X obj -318 -113 s inst;
+#X obj -102 -210 r avg;
+#X floatatom -102 -116 5 0 0 0 - - -;
+#X obj -102 -178 route list;
+#X obj -102 -88 vsl 15 128 0 0.5 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 1068 1;
+#X floatatom -20 -115 5 0 0 0 - - -;
+#X obj -20 -87 vsl 15 128 0 1500 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 4999 1;
+#X obj -357 -81 sigmund~;
+#X obj -357 -50 moses 0;
+#X obj -318 25 vsl 15 128 30 80 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 4575 1;
+#X floatatom 68 -116 5 0 0 0 - - -;
+#X obj 68 -88 vsl 15 128 0 3 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 230 1;
+#X obj -215 -207 rms~;
+#X obj -102 -144 route noisiness.mean f0.mean loudness.mean;
+#X obj -358 -152 essentiaRT~ 50;
+#X obj -215 -139 vsl 15 128 0 1 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 2846 1;
+#X obj -215 -174 average 50;
+#X msg 155 58 send \$1;
+#X text -356 29 pitch;
+#X text -197 -133 loudness;
+#X obj -318 -13 average 20;
+#X text -83 -72 noisiness;
+#X text -1 -72 essentiaf0;
+#X text 87 -72 essentialoudness;
+#N canvas 245 53 804 592 onsetDetector 1;
+#X obj 354 71 r inst;
+#X obj 354 100 route list;
+#X obj 373 268 random;
+#X obj 406 227 length;
+#X obj 354 210 t l b l;
+#X floatatom 361 143 5 0 0 0 - - -;
+#X floatatom 414 247 5 0 0 0 - - -;
+#X msg 360 165 reset;
+#X text 447 186 stores elapsed time between detections;
+#X obj 354 122 route i.strength;
+#X floatatom 426 285 5 0 0 0 - - -;
+#X obj 315 130 bng 20 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text 461 115 Among the many features reported \, We take the onset
+strenght and use that to trigger onsets.;
+#X obj 354 187 list_iot 24000;
+#X text 449 248 onsets in buffer;
+#X text 463 285 on every trigger \, play a random onset in buffer (0
+= oldest);
+#X obj 71 149 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 73 202 f 0;
+#X obj 131 201 + 1;
+#X floatatom 73 237 5 0 0 0 - - -;
+#X obj 150 78 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 67 92 metro 1000;
+#X obj 64 53 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1 1
+;
+#X obj 35 118 t b b;
+#X obj 149 143 t b 0 b;
+#X obj 63 23 loadbang;
+#X obj 71 352 outlet;
+#X obj 303 351 outlet;
+#X obj 183 295 print onsetRate;
+#X obj 187 256 f;
+#X obj 187 351 outlet;
+#X connect 0 0 1 0;
+#X connect 1 0 9 0;
+#X connect 2 0 10 0;
+#X connect 3 0 6 0;
+#X connect 3 0 2 1;
+#X connect 4 1 2 0;
+#X connect 4 2 3 0;
+#X connect 7 0 13 0;
+#X connect 9 0 5 0;
+#X connect 9 0 13 0;
+#X connect 9 0 11 0;
+#X connect 11 0 17 0;
+#X connect 11 0 27 0;
+#X connect 13 0 4 0;
+#X connect 16 0 17 0;
+#X connect 17 0 18 0;
+#X connect 17 0 19 0;
+#X connect 17 0 29 1;
+#X connect 18 0 17 1;
+#X connect 19 0 26 0;
+#X connect 20 0 24 0;
+#X connect 21 0 20 0;
+#X connect 22 0 21 0;
+#X connect 24 0 17 0;
+#X connect 24 1 17 1;
+#X connect 24 2 29 0;
+#X connect 25 0 22 0;
+#X connect 29 0 28 0;
+#X connect 29 0 30 0;
+#X restore 232 -209 pd onsetDetector;
+#X obj 325 -166 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X floatatom 233 -168 5 0 0 0 - - -;
+#X connect 0 0 10 0;
+#X connect 0 0 15 0;
+#X connect 0 0 17 0;
+#X connect 0 1 17 0;
+#X connect 1 0 17 0;
+#X connect 4 0 6 0;
+#X connect 5 0 7 0;
+#X connect 6 0 16 0;
+#X connect 8 0 9 0;
+#X connect 10 0 11 0;
+#X connect 11 1 23 0;
+#X connect 13 0 14 0;
+#X connect 15 0 19 0;
+#X connect 16 0 5 0;
+#X connect 16 1 8 0;
+#X connect 16 2 13 0;
+#X connect 17 1 3 0;
+#X connect 17 2 2 0;
+#X connect 19 0 18 0;
+#X connect 23 0 12 0;
+#X connect 27 0 29 0;
+#X connect 27 2 28 0;
