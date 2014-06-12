@@ -5,13 +5,13 @@
 #N canvas 284 118 543 565 voice_detector 0;
 #X obj 181 48 dbtorms;
 #X obj 258 124 hsl 128 15 0 100 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 388 1;
+-1 -1 869 1;
 #X obj 176 93 autoscale 0 1;
 #X msg 305 57 reset;
 #X obj 174 131 * 100;
 #X floatatom 183 156 5 0 0 0 - - -;
 #X obj 188 211 change;
-#X obj 191 240 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 191 240 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
 1;
 #X obj 178 16 env~ 10000;
 #X obj 189 187 > 5;
@@ -25,14 +25,14 @@
 -1 -1;
 #X obj 303 486 unsig~ 20;
 #X obj 314 516 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 12700 1;
+-1 -1 6350 1;
 #X obj 191 503 outlet~ GAIN;
 #X obj 197 482 *~;
 #X obj 367 449 sel 1;
 #X msg 430 431 1;
 #X msg 499 430 0;
 #X obj 478 498 outlet;
-#X obj 472 464 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 472 464 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
 1;
 #X msg 203 423 0.5 200;
 #X msg 271 424 1 2000;
@@ -72,42 +72,41 @@
 #X obj 234 345 *~;
 #X obj 273 345 *~;
 #X obj 34 103 s~ vox;
-#X obj 680 297 catch~ SynthL;
-#X obj 774 298 catch~ SynthR;
-#X obj 714 350 vols~;
-#X obj 803 337 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 -262144
+#X obj 270 265 catch~ SynthL;
+#X obj 359 266 catch~ SynthR;
+#X obj 274 303 vols~;
+#X obj 460 268 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 -262144
 -1 -1 8000 1;
-#X floatatom 798 357 5 0 0 0 - - -;
+#X floatatom 457 289 5 0 0 0 - - -;
 #X obj 75 9 throw~ MainLR;
 #X obj 357 479 catch~ MainR;
 #X obj 293 533 dac~;
 #X obj 186 480 catch~ MainLR;
-#X obj 752 186 vox 1;
-#X obj 751 78 unpack f f;
-#X obj 754 136 pack f f f;
-#X obj 753 159 send g-vox;
-#X floatatom 705 133 5 0 0 0 - - -;
+#X obj 758 232 vox 1;
+#X obj 757 124 unpack f f;
+#X obj 760 182 pack f f f;
+#X obj 759 205 send g-vox;
+#X floatatom 693 190 5 0 0 0 - - -;
 #X obj 629 136 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj 750 46 t a;
-#X obj 888 285 loadbang;
-#X msg 889 311 80;
+#X obj 455 217 loadbang;
+#X msg 456 243 80;
 #X obj 276 479 catch~ MainL;
 #X obj 219 435 throw~ MainL;
 #X obj 341 436 throw~ MainR;
-#X obj 795 186 vox 2;
-#X obj 837 186 vox 3;
-#X obj 880 186 vox 4;
-#X obj 921 186 vox 5;
-#X obj 755 110 poly 5 1;
+#X obj 801 232 vox 2;
+#X obj 843 232 vox 3;
+#X obj 886 232 vox 4;
+#X obj 927 232 vox 5;
+#X obj 761 156 poly 5 1;
 #X obj 752 -16 essentiaAnalysis;
 #X floatatom 750 8 5 0 0 0 - - -;
 #X floatatom 800 14 5 0 0 0 - - -;
 #X floatatom 852 11 5 0 0 0 - - -;
 #X obj 752 -43 r~ vox;
-#X obj 688 36 s pitch;
-#X obj 813 39 s loudness;
-#N canvas 466 188 580 516 voice_reverb 1;
+#X obj 672 36 s pitch;
+#X obj 895 113 s loudness;
+#N canvas 466 188 580 516 voice_reverb 0;
 #X obj 68 -2837 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
 0 1;
 #X obj 135 -2785 r~ vox;
@@ -123,7 +122,7 @@
 #X msg 278 -2750 wet \$1;
 #X obj 178 -2892 loadbang;
 #X obj 421 -2778 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 657 1;
+-1 -1 6727 1;
 #X msg 277 -2875 \$1 500;
 #X msg 178 -2860 0.7;
 #X obj 463 -2937 r pitch;
@@ -173,18 +172,25 @@
 #X connect 29 0 26 0;
 #X connect 31 0 27 0;
 #X connect 31 0 30 0;
-#X restore 333 173 pd voice_reverb;
-#X obj 228 158 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X restore 259 113 pd voice_reverb;
+#X obj 228 158 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
 1;
+#X obj 624 69 pack f f;
+#X obj 606 7 mtof;
+#X msg 923 39 reset;
+#X obj 898 68 autoscale 0 1;
+#X obj 912 4 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 618 42 f;
 #X connect 1 0 0 0;
 #X connect 2 0 4 0;
 #X connect 2 0 5 0;
-#X connect 2 1 41 0;
+#X connect 2 1 40 0;
 #X connect 3 0 2 0;
 #X connect 3 0 6 0;
 #X connect 3 0 12 0;
-#X connect 4 0 26 0;
-#X connect 5 0 27 0;
+#X connect 4 0 25 0;
+#X connect 5 0 26 0;
 #X connect 7 0 9 0;
 #X connect 8 0 9 1;
 #X connect 9 0 4 1;
@@ -194,21 +200,29 @@
 #X connect 13 0 14 1;
 #X connect 15 0 14 0;
 #X connect 15 0 14 1;
-#X connect 17 0 32 0;
-#X connect 17 1 32 1;
+#X connect 17 0 31 0;
+#X connect 17 1 31 1;
 #X connect 18 0 19 0;
-#X connect 22 0 17 0;
-#X connect 23 0 24 0;
-#X connect 24 0 10 0;
-#X connect 25 0 14 0;
-#X connect 32 0 18 0;
-#X connect 32 0 20 0;
-#X connect 32 0 21 0;
-#X connect 32 1 18 1;
-#X connect 32 2 18 2;
-#X connect 33 0 34 0;
-#X connect 33 1 35 0;
-#X connect 33 2 36 0;
-#X connect 34 0 38 0;
-#X connect 35 0 39 0;
-#X connect 37 0 33 0;
+#X connect 22 0 23 0;
+#X connect 23 0 10 0;
+#X connect 24 0 14 0;
+#X connect 31 0 18 0;
+#X connect 31 0 20 0;
+#X connect 31 0 21 0;
+#X connect 31 1 18 1;
+#X connect 31 2 18 2;
+#X connect 32 0 33 0;
+#X connect 32 1 34 0;
+#X connect 32 2 35 0;
+#X connect 32 3 45 0;
+#X connect 33 0 37 0;
+#X connect 33 0 42 0;
+#X connect 34 0 44 0;
+#X connect 36 0 32 0;
+#X connect 41 0 17 0;
+#X connect 42 0 46 1;
+#X connect 43 0 44 0;
+#X connect 44 0 38 0;
+#X connect 44 0 41 1;
+#X connect 45 0 46 0;
+#X connect 46 0 41 0;
