@@ -1,0 +1,85 @@
+#N canvas 0 22 1062 668 10;
+#X obj 178 -3 dsp;
+#X obj 171 -40 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#N canvas 284 118 543 565 voice_detector 1;
+#X obj 181 48 dbtorms;
+#X obj 258 124 hsl 128 15 0 100 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 2224 1;
+#X obj 176 93 autoscale 0 1;
+#X msg 305 57 reset;
+#X obj 174 131 * 100;
+#X floatatom 183 156 5 0 0 0 - - -;
+#X obj 188 211 change;
+#X obj 191 240 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X obj 178 16 env~ 10000;
+#X obj 189 187 > 5;
+#X obj 190 267 sel 1 0;
+#X msg 203 423 0.2 200;
+#X obj 200 456 line~;
+#X obj 180 -9 inlet~;
+#X msg 271 424 1 1000;
+#X msg 360 328 stop;
+#X obj 232 298 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 412 328 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 303 486 unsig~ 20;
+#X obj 314 516 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 2540 1;
+#X obj 191 503 outlet~ GAIN;
+#X obj 197 482 *~;
+#X obj 367 449 sel 1;
+#X msg 430 431 1;
+#X msg 499 430 0;
+#X obj 478 498 outlet;
+#X obj 472 464 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X obj 360 353 delay 400;
+#X connect 0 0 2 0;
+#X connect 2 0 4 0;
+#X connect 3 0 2 0;
+#X connect 4 0 5 0;
+#X connect 4 0 1 0;
+#X connect 5 0 9 0;
+#X connect 6 0 7 0;
+#X connect 7 0 10 0;
+#X connect 8 0 0 0;
+#X connect 9 0 6 0;
+#X connect 10 0 11 0;
+#X connect 10 0 16 0;
+#X connect 10 1 17 0;
+#X connect 11 0 12 0;
+#X connect 12 0 21 0;
+#X connect 12 0 21 1;
+#X connect 12 0 18 0;
+#X connect 13 0 8 0;
+#X connect 14 0 12 0;
+#X connect 15 0 27 0;
+#X connect 16 0 15 0;
+#X connect 16 0 23 0;
+#X connect 17 0 27 0;
+#X connect 18 0 19 0;
+#X connect 21 0 20 0;
+#X connect 23 0 26 0;
+#X connect 24 0 26 0;
+#X connect 26 0 25 0;
+#X connect 27 0 14 0;
+#X connect 27 0 24 0;
+#X restore 115 113 pd voice_detector;
+#X obj 98 39 adc~;
+#X obj 112 182 *~;
+#X obj 122 234 dac~;
+#X obj 151 182 *~;
+#X obj 358 187 pan~;
+#X obj 407 116 osc~ 1;
+#X obj 228 162 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X connect 1 0 0 0;
+#X connect 2 0 4 0;
+#X connect 2 0 6 0;
+#X connect 2 1 9 0;
+#X connect 3 0 2 0;
+#X connect 4 0 5 0;
+#X connect 6 0 5 1;
