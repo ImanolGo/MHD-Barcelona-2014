@@ -17,6 +17,8 @@ import time
 
 true_text_words = ""
 sender = OSCSender('localhost', 7001)
+jarcodedFileNames = [25,42,57,72,82,98,110,117,160,172,187,200,219,226]
+jarcodedFileNames = np.array(jarcodedFileNames)
 
 def initialize():
 
@@ -190,10 +192,16 @@ def print_string():
     print request.data
     global true_text_words
     global sender
-    predLength = 5
+    global jarcodedFileNames
+    predLength = 10
     next_q = aw_dtw(true_text_words, request.data, predLength)
-    sender.defineMessage("/audio", '../data/audio/' + str(i)+'.mp3')
-    sender.sendMessages()
+
+    if next_q >= jarcodedFileNames[0]:
+        audiotoplay = jarcodedFileNames[jarcodedFileNames < next_q][len(jarcodedFileNames[jarcodedFileNames < next_q])-1]
+        jarcodedFileNames = jarcodedFileNames[jarcodedFileNames > next_q]
+        sender.defineMessage("/audio", '../data/audio/' + str(audiotoplay)+'.mp3')
+        sender.sendMessages()
+
     return ''
 
 if __name__ == '__main__':
