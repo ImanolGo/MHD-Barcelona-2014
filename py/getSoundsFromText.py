@@ -11,6 +11,7 @@ sounds = {}
 
 i = 0
 for word in words:
+	i = i+1
 	if word not in sounds.keys() and '.' in word:
 		word = word.replace('.', '')
 		print "Searching for " + word + ":"
@@ -22,4 +23,4 @@ for word in words:
 			outputfilename = '../data/audio/' + str(i)+'.wav'
 			cmd = 'lame --decode --resample 44.1 ' + convertedfile + ' ' + outputfilename
 			subprocess.call(cmd, shell=True)
-			i = i+1
+			
