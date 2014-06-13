@@ -1,0 +1,219 @@
+#N canvas 5 22 1020 738 10;
+#X declare -path ../bin -path ../utils;
+#X obj 35 -70 cnv 15 300 45 empty empty empty 20 12 0 14 -204786 -66577
+0;
+#X obj -174 181 cnv 15 150 35 empty empty empty 20 12 0 14 -204786
+-66577 0;
+#X obj 53 35 timer;
+#X obj 107 278 +;
+#X obj 143 370 *~;
+#X obj 104 126 list split;
+#X obj 132 257 sum;
+#X obj 94 36 list;
+#X obj 88 8 t b l;
+#X obj 33 -23 delay;
+#X obj 33 0 t b b;
+#X msg 52 -47 stop;
+#X msg -423 243 reset;
+#X obj 134 75 listfind;
+#X obj 152 28 t l l;
+#X floatatom 180 116 5 0 0 0 - - -;
+#X obj -431 289 t l l;
+#X text 217 116 current slice;
+#X obj 134 99 f;
+#X obj 107 324 trapenv 2;
+#X obj -382 316 list_value;
+#X obj -235 242 euclidist;
+#X floatatom -227 266 5 0 0 0 - - -;
+#N canvas 1328 313 232 228 store-mfcc 0;
+#X obj 42 49 inlet;
+#X obj 61 150 outlet;
+#X obj 61 122 list;
+#X obj 44 93 route bang;
+#X obj 128 37 loadbang;
+#X obj 128 60 delay 1000;
+#X connect 0 0 3 0;
+#X connect 2 0 1 0;
+#X connect 3 0 2 0;
+#X connect 3 1 2 1;
+#X connect 4 0 5 0;
+#X connect 5 0 3 0;
+#X restore -184 221 pd store-mfcc;
+#X obj -169 186 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text -376 335 [list_value] receives single values on the right inlet
+and a list with onset times on its left inlet. The result is a new
+list with the same indexes as the inter-onset times.;
+#X obj -382 381 s euclidean_dist;
+#X text -190 267 euclidean distance;
+#X obj 152 5 r euclidean_dist;
+#X text 209 26 Here we find the lowest value in the list of euclidean
+distances (which represent similar sounds) and play that slice back
+until a better match comes in. The result tends to produce loops that
+change over time as the audio comes in and out the buffer.;
+#X floatatom 179 97 5 0 0 0 - - -;
+#X text 219 96 minimum distance;
+#X text -150 199 mfcc to compare to.;
+#X text 76 -67 (3) PRESS BANG TO START SLICING THE INPUT!;
+#X obj -414 108 bng 20 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X msg 42 -68 bang;
+#X obj 134 53 minmax;
+#X obj -420 451 cnv 15 160 50 empty empty empty 20 12 0 14 -261234
+-66577 0;
+#X obj -412 457 output~;
+#X text -344 460 (1) DSP on;
+#X text -344 477 (2) Volume up;
+#X obj -431 316 s iots;
+#X obj 88 -13 r iots;
+#X obj -444 -82 cnv 15 110 18 empty empty empty 20 12 0 14 -204786
+-66577 0;
+#X obj -440 -36 tabplay2~ sample;
+#X obj -440 -81 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+1 1;
+#X msg -420 -57 loop \$1;
+#X obj -420 -81 tgl 15 1 empty empty empty 17 7 0 10 -262144 -1 -1
+1 1;
+#X text -401 -82 (2) play!;
+#X obj -443 -107 cnv 15 360 18 empty empty empty 20 12 0 14 -204800
+-66577 0;
+#N canvas 1302 254 391 162 init 0;
+#X obj -31 39 loadbang;
+#X obj -31 109 soundfiler;
+#X obj -31 131 table sample 4410;
+#X obj -32 17 declare -path ../bin -path ../utils;
+#X msg -31 60 read -resize ./soundfiles/OrenAmbarchi-AudienceOfOne-Salt.wav
+sample \; sample normalize;
+#X connect 0 0 4 0;
+#X connect 4 0 1 0;
+#X restore -432 381 pd init;
+#X obj 107 347 delread~ deline;
+#X obj 33 -92 r newEvent;
+#X text -421 -107 Audio: Oren Ambarchi - Audience of One (2012) - Salt
+;
+#X msg -416 38 delayMode 200;
+#X obj -416 16 loadbang;
+#X obj -430 66 essentiaRT~ 11.5;
+#X obj -373 137 timer;
+#X floatatom -367 161 5 0 0 0 - - -;
+#X obj -346 117 t b;
+#X obj -373 117 t b;
+#X obj -431 217 pipe 200;
+#X obj 140 148 cnv 15 300 100 empty empty empty 20 12 0 14 -261682
+-66577 0;
+#X obj 145 227 s newEvent;
+#X obj 145 185 list split 1;
+#X floatatom 151 207 7 0 0 0 - - -;
+#X text 202 207 length of current chunk;
+#X text 226 185 (elapsed time from previous onset);
+#X text 151 149 we use this method to calculate the duration;
+#X text 151 163 of the currently selected slice;
+#X obj -437 406 balance~;
+#X obj 107 300 - 5.8;
+#X obj -223 204 once;
+#X obj -223 181 t b l l;
+#X text -440 -232 3 Simple classification;
+#X text -442 -224 ==========================;
+#X text -371 189 between instantaneous;
+#X text -371 202 report and "averaged";
+#X text -371 216 parameters in outlet3.;
+#X text -371 178 measure the time delay;
+#N canvas 201 535 373 187 filtering 0;
+#X obj 29 -579 inlet;
+#X obj 29 -484 outlet;
+#X obj 29 -557 route list;
+#X obj 202 -572 inlet;
+#X obj 202 -551 route list;
+#X obj 202 -529 route mfcc.mean;
+#X obj 202 -505 timegate 200;
+#X obj 29 -510 timegate 200;
+#X obj 202 -481 outlet;
+#X obj 29 -536 route i.strength;
+#X text 28 -466 onsets;
+#X text 201 -459 averaged mfcc analysis;
+#X connect 0 0 2 0;
+#X connect 2 0 9 0;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 5 0 6 0;
+#X connect 6 0 8 0;
+#X connect 7 0 1 0;
+#X connect 9 0 7 0;
+#X restore -384 91 pd filtering;
+#X text -440 -210 This example attempts a simple classification of
+the detected onsets. It takes the averaged mfcc's over 200 ms. once
+an onset is reported. Then \, it alculates their euclidean distance
+to a user selected mfcc "snapshot." These distances are stored in a
+list in sync with the onset times (thanks to [list_value]) \, so that
+we can use them to play slices that are similar to the selected mfcc
+back.;
+#X text -324 29 the delayMode method sets the window size (in miliseconds)
+for a finer feature analysis coming out of outlet 3;
+#X obj -425 -11 delwrite~ deline 3000;
+#X obj -431 266 list_iot 3000;
+#X text -148 184 press to take a;
+#X connect 2 0 3 0;
+#X connect 3 0 71 0;
+#X connect 4 0 70 1;
+#X connect 5 1 6 0;
+#X connect 5 1 64 0;
+#X connect 6 0 3 1;
+#X connect 7 0 5 0;
+#X connect 8 0 2 0;
+#X connect 8 1 7 1;
+#X connect 9 0 10 0;
+#X connect 10 0 2 1;
+#X connect 10 1 7 0;
+#X connect 11 0 9 0;
+#X connect 12 0 84 0;
+#X connect 13 0 18 0;
+#X connect 14 0 36 0;
+#X connect 14 1 13 1;
+#X connect 16 0 41 0;
+#X connect 16 1 20 0;
+#X connect 18 0 5 1;
+#X connect 18 0 15 0;
+#X connect 19 0 51 0;
+#X connect 19 1 4 1;
+#X connect 20 0 26 0;
+#X connect 21 0 22 0;
+#X connect 21 0 20 1;
+#X connect 23 0 21 1;
+#X connect 24 0 23 0;
+#X connect 28 0 14 0;
+#X connect 35 0 9 0;
+#X connect 36 0 13 0;
+#X connect 36 0 30 0;
+#X connect 42 0 8 0;
+#X connect 44 0 56 0;
+#X connect 44 0 70 0;
+#X connect 44 0 83 0;
+#X connect 45 0 44 0;
+#X connect 46 0 44 0;
+#X connect 47 0 46 0;
+#X connect 51 0 4 0;
+#X connect 52 0 9 0;
+#X connect 54 0 56 0;
+#X connect 55 0 54 0;
+#X connect 56 1 80 0;
+#X connect 56 2 80 1;
+#X connect 57 0 58 0;
+#X connect 57 0 61 1;
+#X connect 59 0 57 1;
+#X connect 60 0 57 0;
+#X connect 61 0 84 0;
+#X connect 64 0 63 0;
+#X connect 64 0 65 0;
+#X connect 70 0 38 0;
+#X connect 70 1 38 1;
+#X connect 71 0 19 0;
+#X connect 72 0 23 0;
+#X connect 73 0 72 0;
+#X connect 73 1 21 0;
+#X connect 73 2 23 0;
+#X connect 80 0 34 0;
+#X connect 80 0 60 0;
+#X connect 80 0 61 0;
+#X connect 80 1 59 0;
+#X connect 80 1 73 0;
+#X connect 84 0 16 0;

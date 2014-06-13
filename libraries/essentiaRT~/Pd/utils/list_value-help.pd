@@ -1,0 +1,35 @@
+#N canvas 839 250 371 409 10;
+#X obj 89 147 delay;
+#X obj 129 147 random 5;
+#X msg 137 248 reset;
+#X msg 89 103 bang;
+#X msg 97 123 stop;
+#X floatatom 139 222 5 0 0 0 - - -;
+#X obj 129 343 print list-iot;
+#X obj 129 273 list_iot 2000;
+#X obj 129 179 * 100;
+#X obj 129 201 + 100;
+#X obj 223 184 random 12;
+#X obj 136 320 print list-parameters;
+#X obj 136 296 list_value 2000;
+#X text 7 5 [list_value] is meant to work together with [list_iot].
+It stores incoming values through its right inlet into a list which
+is aligned with the list of inter-onset times received in its right
+inlet. In this way \, we can store information over the incoming events
+together with their position in time.;
+#X obj 302 379 list_iot;
+#X text 241 379 see also:;
+#X connect 0 0 1 0;
+#X connect 0 0 10 0;
+#X connect 1 0 8 0;
+#X connect 2 0 7 0;
+#X connect 3 0 0 0;
+#X connect 4 0 0 0;
+#X connect 7 0 6 0;
+#X connect 7 0 12 0;
+#X connect 8 0 9 0;
+#X connect 9 0 5 0;
+#X connect 9 0 0 0;
+#X connect 9 0 7 0;
+#X connect 10 0 12 1;
+#X connect 12 0 11 0;
