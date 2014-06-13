@@ -1,4 +1,6 @@
 import freesound
+import subprocess
+
 c = freesound.FreesoundClient()
 c.set_token("36e286ba563287f86eed608c13cacd520ced010e","token")
 
@@ -14,3 +16,6 @@ for word in words:
 		print "----------------------------"
 		results_pager = c.text_search(query=word, filter="duration:[0 TO 1.5]" , sort="rating_desc", fields="id,name,previews")
 		sounds[word] = results_pager[0].retrieve_preview('.', word+'.mp3')
+		convertedfile = word+'.mp3'
+		cmd = 'lame --resample 44.1 %s' % convertedfile
+		subprocess.call(cmd, shell=True)
