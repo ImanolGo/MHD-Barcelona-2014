@@ -3,21 +3,21 @@
 #X floatatom 18 -76 5 0 0 0 - - -;
 #X obj 18 -138 route list;
 #X obj 18 -48 vsl 15 128 0 0.5 0 0 empty empty empty 0 -9 0 10 -262144
--1 -1 11069 1;
+-1 -1 2698 1;
 #X floatatom 100 -75 5 0 0 0 - - -;
 #X obj 100 -47 vsl 15 128 0 1500 0 0 empty empty empty 0 -9 0 10 -262144
--1 -1 3937 1;
+-1 -1 12700 1;
 #X obj -357 -81 sigmund~;
 #X obj -357 -50 moses 0;
 #X obj -318 25 vsl 15 128 30 80 0 0 empty empty empty 0 -9 0 10 -262144
--1 -1 4602 1;
+-1 -1 4746 1;
 #X floatatom 188 -76 5 0 0 0 - - -;
 #X obj 188 -48 vsl 15 128 0 3 0 0 empty empty empty 0 -9 0 10 -262144
--1 -1 0 1;
+-1 -1 37 1;
 #X obj -117 -189 rms~;
 #X obj 18 -104 route noisiness.mean f0.mean loudness.mean;
 #X obj -117 -121 vsl 15 128 0 1 0 0 empty empty empty 0 -9 0 10 -262144
--1 -1 23 1;
+-1 -1 837 1;
 #X obj -117 -156 average 50;
 #X text -356 29 pitch;
 #X text -99 -115 loudness;
@@ -112,7 +112,7 @@ strenght and use that to trigger onsets.;
 #X floatatom 292 140 5 0 0 0 - - -;
 #X obj 290 109 temperature 1000;
 #X obj 345 62 t b b;
-#X obj -358 -152 essentiaRT~ 0.5;
+#X obj -358 -152 essentiaRT~ 4;
 #X connect 0 0 40 0;
 #X connect 1 0 3 0;
 #X connect 2 0 12 0;
