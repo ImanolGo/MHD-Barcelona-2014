@@ -1,6 +1,7 @@
 
 import numpy as np
 from scipy import stats
+from OSCSender import OSCSender
 import time
 # import matplotlib.pyplot as plt
 
@@ -129,6 +130,8 @@ fid = open('../data/text/imanol_test.txt', 'r');
 spoken_text = fid.read()
 fid.close()
 
+sender = OSCSender('localhost', 7001)
+
 predLength = 5
 
 # for i in xrange(1,20):
@@ -137,4 +140,6 @@ while i*5 < len(true_text_words):
 	inputlength = i * 5
 	spoken_text_words = spoken_text.split()[:inputlength]
 	next_q = aw_dtw(true_text_words, spoken_text_words, predLength)
+	sender.defineMessage("/audio", '../data/audio/' + str(i)+'.mp3')
+	sender.sendMessages()
 	i = i+1
