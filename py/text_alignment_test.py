@@ -130,16 +130,23 @@ fid = open('../data/text/imanol_test.txt', 'r');
 spoken_text = fid.read()
 fid.close()
 
-sender = OSCSender('localhost', 7001)
+sender = OSCSender('10.220.0.84', 7001)
 
-predLength = 5
+predLength = 10
 
+# =)
+jarcodedFileNames = [25,42,57,72,82,98,110,117,160,172,187,200,219,226]
+jarcodedFileNames = np.array(jarcodedFileNames)
 # for i in xrange(1,20):
+
 i = 1
 while i*5 < len(true_text_words):
 	inputlength = i * 5
 	spoken_text_words = spoken_text.split()[:inputlength]
 	next_q = aw_dtw(true_text_words, spoken_text_words, predLength)
-	sender.defineMessage("/audio", '../data/audio/' + str(i)+'.mp3')
-	sender.sendMessages()
+
+	if next_q >= jarcodedFileNames[0]:
+		audiotoplay = jarcodedFileNames[jarcodedFileNames < next_q][len(jarcodedFileNames[jarcodedFileNames < next_q])-1]
+		sender.defineMessage("/audio", '../data/audio/' + str(audiotoplay)+'.mp3')
+		sender.sendMessages()
 	i = i+1
