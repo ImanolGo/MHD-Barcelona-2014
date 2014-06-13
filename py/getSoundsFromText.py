@@ -20,7 +20,7 @@ for word in words:
 		if len(results_pager.results) > 0:
 			sounds[word] = results_pager[0].retrieve_preview('.', word+'.mp3')
 			convertedfile = word+'.mp3'
-			outputfilename = '../data/audio/' + str(i)+'.wav'
-			cmd = 'lame --decode --resample 44.1 ' + convertedfile + ' ' + outputfilename
+			outputfilename = '../data/audio/' + str(i)+'.mp3'
+			cmd = 'lame --resample 44.1 ' + convertedfile + ' ' + outputfilename
 			subprocess.call(cmd, shell=True)
 			
