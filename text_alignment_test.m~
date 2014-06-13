@@ -15,8 +15,8 @@ dm2 = distance_matrix;
 
 for i=1:length(true_text{1})
     for j=1:length(spoken_text{1})
-        distance_matrix(i,j) = strcmpi(true_text{1}{i},spoken_text{1}{j});
-        %distance_matrix(i,j) = levenshtein_distance(true_text{1}{i},spoken_text{1}{j});
+        %distance_matrix(i,j) = strcmpi(true_text{1}{i},spoken_text{1}{j});
+        distance_matrix(i,j) = levenshtein_distance(true_text{1}{i},spoken_text{1}{j})/mean([length(true_text{1}) length(spoken_text{1})]);
     end
 end
 
@@ -27,7 +27,7 @@ while pos < max(length(spoken_text{1}),length(true_text{1}))
     posTrue = min(pos,length(true_text{1}));
     dm2(1:posTrue,1:posSpoken) = distance_matrix(1:posTrue,1:posSpoken);
     imagesc(dm2);
-    [p,q,C] = dp(1-distance_matrix(1:posTrue,1:posSpoken));
+    [p,q,C] = dp(distance_matrix(1:posTrue,1:posSpoken));
     hold on; plot(q,p,'w','LineWidth',2); hold off;
     if (pos>1)
         model = polyfit(q,p,1);
