@@ -1,32 +1,36 @@
+
 <!doctype html>
+<html>
+<body>
+
+<script type="text/javascript" src="speech_recognition.js"></script>
+<script type="text/javascript" src="read_textfile.js"></script>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript">
-
-$(document).ready(function(){
-	do_something();
-
-});
 
 
-function do_something(){
-    $.ajax({
-        type: 'POST',
-        url: '/do_something/',
-        contentType:"application/json;charset=UTF-8",
-        data: JSON.stringify("un string MEGA cojonundo!!!!"),
-        success: function(data) {
-            console.log("DONE!")
-        },
-        dataType: 'json'
-    });
-}
-
-
-</script>
-<title>Hello from Flask</title>
+<title>Fairyteller</title>
 {% if name %}
-  <h1>Hello {{ name }}!</h1>
+  <h1>Fairyteller {{ name }}!</h1>
 {% else %}
-  <h1>Hello World!</h1>
+  <h1>Fairyteller!</h1>
 {% endif %}
+
+<form>
+<button id="button" onclick="toggleStartStop()"></button>
+<input type="file" id="fileinput" />
+<br><br>
+<div style="border:dotted;padding:10px">
+<span id="final_span"></span>
+<span id="interim_span" style="color:grey"></span>
+</div>
+<br><br><br>
+<div style="border:dotted;padding:10px">
+<span id="fairy_tale"></span>
+</div>
+</form>
+
+
+</body>
+</html>
+
 

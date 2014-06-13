@@ -13,7 +13,6 @@ recognition.onresult = function (event) {
       final += event.results[i][0].transcript;
     } else {
       interim += event.results[i][0].transcript;
-
       //console.log(event.results[i][0].confidence);
     }
   }
