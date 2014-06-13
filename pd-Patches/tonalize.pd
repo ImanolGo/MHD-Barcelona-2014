@@ -1,4 +1,4 @@
-#N canvas 38 48 541 407 10;
+#N canvas 38 48 863 522 10;
 #X obj 143 27 inlet;
 #X obj 141 69 t f f;
 #X obj 140 188 i;
@@ -11,11 +11,26 @@
 #X obj 225 136 t b f;
 #X obj 140 48 i;
 #X floatatom 252 278 5 0 0 0 - - -;
-#X msg 298 162 0 3 6 9 3 6 9 12 6 9 12;
-#X msg 297 135 0 2 2 3 3 4 4 7 8 8 10 10;
-#X msg 300 190 0 0 2 2 4 5 7 7 9 9 9;
+#X msg 484 252 0 3 6 9 3 6 9 12 6 9 12;
+#X msg 376 217 0 2 2 3 3 4 4 7 8 8 10 10;
 #X obj 338 27 inlet loudness;
-#X obj 479 31 inlet onset_rate;
+#X obj 493 16 inlet onset_rate;
+#X floatatom 345 66 5 0 0 0 - - -;
+#X floatatom 474 65 5 0 0 0 - - -;
+#X obj 335 106 hradio 15 1 0 9 empty empty empty 0 -8 0 10 -262144
+-1 -1 0;
+#X obj 337 137 route 0 1 2 3 4 5 6 7 8;
+#X obj 500 108 min 9;
+#X floatatom 506 140 5 0 0 0 - - -;
+#X msg 514 276 0 1 2 3 4 5 6 7 8 9 10 11 12;
+#X obj 303 134 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 298 174 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 520 60 * 8;
+#X obj 324 168 delay 1000;
+#X obj 485 38 *;
+#X msg 309 192 0 2 4 6 7 9 10 7 4 6;
 #X connect 0 0 10 0;
 #X connect 1 0 3 0;
 #X connect 1 1 8 0;
@@ -31,4 +46,27 @@
 #X connect 10 0 1 0;
 #X connect 12 0 7 0;
 #X connect 13 0 7 0;
-#X connect 14 0 7 0;
+#X connect 14 0 16 0;
+#X connect 15 0 27 0;
+#X connect 15 0 27 1;
+#X connect 17 0 20 0;
+#X connect 18 0 19 0;
+#X connect 18 0 23 0;
+#X connect 19 0 24 0;
+#X connect 19 0 26 0;
+#X connect 19 1 26 0;
+#X connect 19 2 26 0;
+#X connect 19 3 13 0;
+#X connect 19 4 13 0;
+#X connect 19 5 13 0;
+#X connect 19 6 13 0;
+#X connect 19 7 12 0;
+#X connect 19 8 12 0;
+#X connect 19 9 12 0;
+#X connect 20 0 18 0;
+#X connect 20 0 21 0;
+#X connect 22 0 7 0;
+#X connect 25 0 17 0;
+#X connect 26 0 28 0;
+#X connect 27 0 25 0;
+#X connect 28 0 7 0;
