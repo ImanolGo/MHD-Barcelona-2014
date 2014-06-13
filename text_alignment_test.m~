@@ -1,0 +1,39 @@
+fid = fopen('/Users/panpap/Documents/MHD2014/three_little_pigs.txt');
+true_text = textscan(fid,'%s ');
+fclose(fid);
+
+%fid = fopen('/Users/panpap/Documents/MHD2014/alvaro_test.txt');
+fid = fopen('/Users/panpap/Documents/MHD2014/imanol_test.txt');
+%fid = fopen('/Users/panpap/Documents/MHD2014/robert_test.txt');
+spoken_text = textscan(fid,'%s ');
+fclose(fid);
+
+clear fid; clear ans;
+
+distance_matrix = zeros(length(true_text{1}),length(spoken_text{1}));
+dm2 = distance_matrix;
+
+for i=1:length(true_text{1})
+    for j=1:length(spoken_text{1})
+        distance_matrix(i,j) = strcmpi(true_text{1}{i},spoken_text{1}{j});
+        %distance_matrix(i,j) = levenshtein_distance(true_text{1}{i},spoken_text{1}{j});
+    end
+end
+
+pos = 1;
+
+while pos < max(length(spoken_text{1}),length(true_text{1}))
+    posSpoken = min(pos,length(spoken_text{1}));
+    posTrue = min(pos,length(true_text{1}));
+    dm2(1:posTrue,1:posSpoken) = distance_matrix(1:posTrue,1:posSpoken);
+    imagesc(dm2);
+    [p,q,C] = dp(1-distance_matrix(1:posTrue,1:posSpoken));
+    hold on; plot(q,p,'w','LineWidth',2); hold off;
+    if (pos>1)
+        model = polyfit(q,p,1);
+        q_future = (1:posTrue+3)*model(1) + model(2);
+        hold on;plot((1:min(posTrue+3,length(true_text{1}))),q_future,'y');hold off;
+    end
+    drawnow;
+    pos = pos + 3;
+end
