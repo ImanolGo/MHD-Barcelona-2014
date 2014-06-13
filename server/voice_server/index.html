@@ -1,0 +1,39 @@
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<button id="button" onclick="toggleStartStop()"></button>
+<input type="file" id="fileinput" />
+<br><br>
+<div style="border:dotted;padding:10px">
+<span id="final_span"></span>
+<span id="interim_span" style="color:grey"></span>
+</div>
+<br><br><br>
+<div style="border:dotted;padding:10px">
+<span id="fairy_tale"></span>
+</div>
+
+  <script type="text/javascript">
+
+  	 $(document).ready(function(){
+
+
+	});
+
+
+	function send_string(text){
+	    $.ajax({
+	        type: 'POST',
+	        url: 'http://localhost:5000/receive_string/',
+	        contentType:"text/plain",
+	        data: text,
+	        success: function(data) {
+	            console.log("DONE!")
+	        }
+	    });
+	}
+
+  </script>
+
+ <script type="text/javascript" src="speech_recognition.js"></script>
+ <script type="text/javascript" src="read_textfile.js"></script>
+

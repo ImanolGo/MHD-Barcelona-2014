@@ -3,17 +3,10 @@
 <html>
 <body>
 
-<script type="text/javascript" src="speech_recognition.js"></script>
-<script type="text/javascript" src="read_textfile.js"></script>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
-
 <title>Fairyteller</title>
-{% if name %}
-  <h1>Fairyteller {{ name }}!</h1>
-{% else %}
-  <h1>Fairyteller!</h1>
-{% endif %}
+<h1>Fairyteller!</h1>
 
 <form>
 <button id="button" onclick="toggleStartStop()"></button>
@@ -28,6 +21,9 @@
 <span id="fairy_tale"></span>
 </div>
 </form>
+
+<script type="text/javascript" src="{{ url_for('static', filename='speech_recognition.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='read_textfile.js') }}"></script>
 
 
 </body>
