@@ -1,0 +1,46 @@
+#N canvas 558 49 551 564 10;
+#X declare -lib mrpeach;
+#X obj 340 42 import mrpeach;
+#X obj 32 33 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1 1
+;
+#X obj 32 99 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X msg 17 223 Three;
+#X msg 67 223 Little;
+#X msg 117 223 Pigs;
+#X obj 29 170 random 3;
+#X obj 27 197 sel 0 1 2;
+#X obj 24 405 packOSC;
+#X obj 126 462 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X msg 258 367 disconnect;
+#X obj 31 259 tosymbol;
+#X obj 126 436 udpsend;
+#X obj 32 124 t b b;
+#X msg 259 335 connect 127.0.0.1 12000;
+#X obj 32 72 metro 1000;
+#X msg 25 369 send /text \$1 \$2;
+#X obj 29 339 pack s f;
+#X obj 31 284 t a b;
+#X obj 68 310 random 1000;
+#X connect 1 0 15 0;
+#X connect 2 0 13 0;
+#X connect 3 0 11 0;
+#X connect 4 0 11 0;
+#X connect 5 0 11 0;
+#X connect 6 0 7 0;
+#X connect 7 0 3 0;
+#X connect 7 1 4 0;
+#X connect 7 2 5 0;
+#X connect 8 0 12 0;
+#X connect 10 0 12 0;
+#X connect 11 0 18 0;
+#X connect 12 0 9 0;
+#X connect 13 0 6 0;
+#X connect 14 0 12 0;
+#X connect 15 0 2 0;
+#X connect 16 0 8 0;
+#X connect 17 0 16 0;
+#X connect 18 0 17 0;
+#X connect 18 1 19 0;
+#X connect 19 0 17 1;
